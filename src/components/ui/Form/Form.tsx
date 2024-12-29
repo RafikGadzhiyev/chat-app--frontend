@@ -76,9 +76,20 @@ const FormItem = React.forwardRef<
 >(({ className, ...props }, ref) => {
   const id = React.useId()
 
+  const mergedClasses = cn(
+    [
+      "space-y-2",
+      className || "",
+    ]
+  )
+
   return (
     <FormItemContext.Provider value={{ id }}>
-      <div ref={ref} className={cn("space-y-2", className)} {...props} />
+      <div
+        ref={ref}
+        className={mergedClasses}
+        {...props}
+      />
     </FormItemContext.Provider>
   )
 })
@@ -90,10 +101,21 @@ const FormLabel = React.forwardRef<
 >(({ className, ...props }, ref) => {
   const { error, formItemId } = useFormField()
 
+  const textStyle = error
+    ? "text-destructive"
+    : ""
+
+  const mergedClasses = cn(
+    [
+      textStyle,
+      className || "",
+    ]
+  )
+
   return (
     <Label
       ref={ref}
-      className={cn(error && "text-destructive", className)}
+      className={mergedClasses}
       htmlFor={formItemId}
       {...props}
     />
@@ -107,15 +129,15 @@ const FormControl = React.forwardRef<
 >(({ ...props }, ref) => {
   const { error, formItemId, formDescriptionId, formMessageId } = useFormField()
 
+  const describedBy = !error
+    ? `${formDescriptionId}`
+    : `${formDescriptionId} ${formMessageId}`
+
   return (
     <Slot
       ref={ref}
       id={formItemId}
-      aria-describedby={
-        !error
-          ? `${formDescriptionId}`
-          : `${formDescriptionId} ${formMessageId}`
-      }
+      aria-describedby={describedBy}
       aria-invalid={!!error}
       {...props}
     />
@@ -129,11 +151,18 @@ const FormDescription = React.forwardRef<
 >(({ className, ...props }, ref) => {
   const { formDescriptionId } = useFormField()
 
+  const mergedClasses = cn(
+    [
+      "text-[0.8rem] text-muted-foreground",
+      className || "",
+    ]
+  )
+
   return (
     <p
       ref={ref}
       id={formDescriptionId}
-      className={cn("text-[0.8rem] text-muted-foreground", className)}
+      className={mergedClasses}
       {...props}
     />
   )
@@ -147,6 +176,13 @@ const FormMessage = React.forwardRef<
   const { error, formMessageId } = useFormField()
   const body = error ? String(error?.message) : children
 
+  const mergedClasses = cn(
+    [
+      "text-[0.8rem] font-medium text-destructive",
+      className || ""
+    ]
+  )
+
   if (!body) {
     return null
   }
@@ -155,7 +191,7 @@ const FormMessage = React.forwardRef<
     <p
       ref={ref}
       id={formMessageId}
-      className={cn("text-[0.8rem] font-medium text-destructive", className)}
+      className={mergedClasses}
       {...props}
     >
       {body}

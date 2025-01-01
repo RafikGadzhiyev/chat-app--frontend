@@ -30,7 +30,7 @@ const router = createBrowserRouter(
           Component: SignUp
         },
         {
-          path: ROUTES.CHATS,
+          path: ROUTES.CHATS + "/:id?",
           Component: ChatsPage
         },
         {

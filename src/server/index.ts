@@ -12,6 +12,7 @@ const api = {
         )
         .then(getItemsFromResponse)
     },
+
     signUp: (body: any) => {
       return apiInstance.post(
         "/auth/sign-up",
@@ -21,6 +22,7 @@ const api = {
         }
       )
     },
+
     session: () => {
       return apiInstance.get(
         "/auth/session",
@@ -28,6 +30,37 @@ const api = {
           withCredentials: true,
         }
       )
+        .then(getItemsFromResponse)
+    }
+  },
+
+  chat: {
+    get: (params: any) => {
+      return apiInstance
+        .get(
+          "/chat",
+          {
+            params
+          }
+        )
+        .then(getItemsFromResponse)
+    },
+    // ANY FOR NOW
+    create: (body: any) => {
+      return apiInstance.post(
+        "/chat/new",
+          body
+      )
+        .then(getItemsFromResponse)
+    }
+  },
+
+  user: {
+    get: () => {
+      return apiInstance
+        .get(
+          "/user",
+        )
         .then(getItemsFromResponse)
     }
   }

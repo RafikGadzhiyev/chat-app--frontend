@@ -8,7 +8,7 @@ import router from "@/router/router.ts";
 import "./index.css"
 import "react-toastify/dist/ReactToastify.css"
 const rootNode = createRoot(
-  document.getElementById("root")!
+  document.getElementById("root")!,
 )
 
 rootNode

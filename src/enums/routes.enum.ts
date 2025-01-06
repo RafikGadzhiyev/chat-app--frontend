@@ -3,7 +3,7 @@ export const ROUTES = {
   SIGN_IN: "/sign-in",
   SIGN_UP: "/sign-up",
   FORGOT_PASSWORD: "/forgot-password",
-  CHATS: "/c"
+  CHATS: "/c",
 }
 
 export const AUTH_ROUTE_PATH_NAMES = [

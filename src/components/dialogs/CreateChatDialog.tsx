@@ -30,8 +30,8 @@ export default function CreateChatDialog(props: ICreateChatDialog) {
               <TooltipTrigger asChild>
                 <div>
                   <Icon
-                    name='SquarePlus'
-                    color='white'
+                    name="SquarePlus"
+                    color="white"
                   />
                 </div>
               </TooltipTrigger>
@@ -52,7 +52,7 @@ export default function CreateChatDialog(props: ICreateChatDialog) {
             </DialogTitle>
           </DialogHeader>
 
-          <div className='flex flex-col gap-4'>
+          <div className="flex flex-col gap-4">
             <ChatCreationForm
               onChatCreate={props.onChatCreate}
               closeDialog={closeDialog}

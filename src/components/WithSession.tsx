@@ -6,7 +6,7 @@ import useAuthStore from "@/store/auth.store.ts";
 
 import {
   isIndexRoute,
-  isAuthRoutes
+  isAuthRoutes,
 } from "@/router/router.utils"
 
 import {ROUTES} from "@/enums/routes.enum.ts";
@@ -33,11 +33,11 @@ export default function WithSession() {
               navigate(
                 ROUTES.CHATS,
                 {
-                  replace: true
-                }
+                  replace: true,
+                },
               )
             }
-          }
+          },
         )
         .catch(
           (err) => {
@@ -49,10 +49,10 @@ export default function WithSession() {
             }
 
             console.error(err)
-          }
+          },
         )
-  },
-    [route.pathname]
+    },
+    [route.pathname],
   );
 
   return <Outlet/>

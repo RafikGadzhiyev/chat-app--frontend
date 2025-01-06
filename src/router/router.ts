@@ -27,19 +27,19 @@ const router = createBrowserRouter(
         },
         {
           path: ROUTES.SIGN_UP,
-          Component: SignUp
+          Component: SignUp,
         },
         {
           path: ROUTES.CHATS + "/:id?",
-          Component: ChatsPage
+          Component: ChatsPage,
         },
         {
           path: "*",
           Component: NotFound,
         },
-      ]
-    }
-  ]
+      ],
+    },
+  ],
 )
 
 export default router

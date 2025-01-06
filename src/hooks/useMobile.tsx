@@ -16,16 +16,16 @@ export function useIsMobile() {
     const mql = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT}px)`)
 
     mql.addEventListener(
-        "change",
-        onMediaQueryListChange
-      )
+      "change",
+      onMediaQueryListChange,
+    )
 
     setIsMobile(window.innerWidth < MOBILE_BREAKPOINT)
 
     return () => {
       mql.removeEventListener(
         "change",
-        onMediaQueryListChange
+        onMediaQueryListChange,
       )
     }
   }, [])

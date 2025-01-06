@@ -6,7 +6,7 @@ import {showErrorToast} from "@/utils/toast.util.ts";
 const instance = axios.create(
   {
     baseURL: import.meta.env.VITE_SERVER_BASE_URL + "/api",
-  }
+  },
 )
 
 instance.interceptors.request.use(
@@ -16,7 +16,7 @@ instance.interceptors.request.use(
     req.headers.Authorization = `Bearer ${token}`
 
     return req
-  }
+  },
 )
 
 instance.interceptors.response.use(
@@ -32,7 +32,7 @@ instance.interceptors.response.use(
     }
 
     return Promise.reject(errResponse)
-  }
+  },
 )
 
 export default instance

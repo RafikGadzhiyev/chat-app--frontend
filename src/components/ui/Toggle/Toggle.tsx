@@ -15,20 +15,20 @@ const Toggle = React.forwardRef<
     size,
     ...props
   },
-  ref
+  ref,
 ) => {
   const classesFromVariants = toggleVariants(
     {
       variant,
       size,
-      className
-    }
+      className,
+    },
   )
 
   const mergedClasses = cn(
     [
-      classesFromVariants
-    ]
+      classesFromVariants,
+    ],
   )
 
   return (
@@ -59,7 +59,7 @@ const toggleVariants = cva(
       variant: "default",
       size: "default",
     },
-  }
+  },
 )
 
 Toggle.displayName = TogglePrimitive.Root.displayName

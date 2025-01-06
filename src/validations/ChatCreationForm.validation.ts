@@ -10,13 +10,13 @@ const chatCreationFormValidation = z.object(
     description: z.string()
       .max(DESCRIPTION_MAX_LENGTH)
       .optional(),
-  }
+  },
 )
 
 type ChatCreationFormValidation = z.infer<typeof chatCreationFormValidation>
 
 export type {
-  ChatCreationFormValidation
+  ChatCreationFormValidation,
 }
 
 export default chatCreationFormValidation

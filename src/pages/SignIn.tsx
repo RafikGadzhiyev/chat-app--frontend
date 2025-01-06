@@ -3,11 +3,11 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import
-  signInFormValidation,
-  {
-    SignInFormValidation
-  }
-from "@/validations/SignInForm.validation.ts";
+signInFormValidation,
+{
+  SignInFormValidation,
+}
+  from "@/validations/SignInForm.validation.ts";
 
 import { useLoading } from "@/hooks/useLoading"
 
@@ -44,8 +44,8 @@ function SignIn() {
       defaultValues: {
         email: "",
         password: "",
-      }
-    }
+      },
+    },
   )
 
   const setAccessToken = useAuthStore((store) => store.setAccessToken)
@@ -65,15 +65,15 @@ function SignIn() {
           setUser(data.user)
 
           navigate(ROUTES.CHATS)
-        }
+        },
       )
       .finally(stopLoading)
   }
 
-  return <div className='flex w-full min-h-[100vh]'>
-    <div className='flex-1 flex items-center justify-center px-4 py-2'>
-      <div className='flex flex-col gap-5'>
-        <h1 className='font-bold text-4xl text-center'>Welcome back!</h1>
+  return <div className="flex w-full min-h-[100vh]">
+    <div className="flex-1 flex items-center justify-center px-4 py-2">
+      <div className="flex flex-col gap-5">
+        <h1 className="font-bold text-4xl text-center">Welcome back!</h1>
 
         <div>
           <Form
@@ -82,10 +82,10 @@ function SignIn() {
             <form
               onSubmit={formControlState.handleSubmit(signIn)}
             >
-              <div className='flex flex-col w-[25rem] gap-3'>
+              <div className="flex flex-col w-[25rem] gap-3">
                 <FormField
                   control={formControlState.control}
-                  name='email'
+                  name="email"
                   render={
                     ({field}) => (
                       <FormItem>
@@ -95,8 +95,8 @@ function SignIn() {
 
                         <FormControl>
                           <Input
-                            placeholder='Email'
-                            type='email'
+                            placeholder="Email"
+                            type="email"
                             {...field}
                           />
                         </FormControl>
@@ -109,7 +109,7 @@ function SignIn() {
 
                 <FormField
                   control={formControlState.control}
-                  name='password'
+                  name="password"
                   render={
                     ({field}) => (
                       <FormItem>
@@ -119,8 +119,8 @@ function SignIn() {
 
                         <FormControl>
                           <Input
-                            placeholder='Password'
-                            type='password'
+                            placeholder="Password"
+                            type="password"
                             {...field}
                           />
                         </FormControl>
@@ -132,14 +132,14 @@ function SignIn() {
                 />
               </div>
 
-              <div className='flex items-center justify-between text-sm mt-4'>
-                <div className='flex items-center gap-3'>
+              <div className="flex items-center justify-between text-sm mt-4">
+                <div className="flex items-center gap-3">
                   <Checkbox
-                    id='login--remember_me'
+                    id="login--remember_me"
                   />
 
                   <label
-                    htmlFor='login--remember_me'
+                    htmlFor="login--remember_me"
                   >
                     Remember me
                   </label>
@@ -154,10 +154,10 @@ function SignIn() {
                 </div>
               </div>
 
-              <div className='flex mt-4'>
+              <div className="flex mt-4">
                 <Button
-                  type='submit'
-                  className='flex-1'
+                  type="submit"
+                  className="flex-1"
                   disabled={isLoading}
                 >
                   Sign in
@@ -166,8 +166,7 @@ function SignIn() {
             </form>
           </Form>
 
-
-          <div className='flex items-center gap-2 text-sm'>
+          <div className="flex items-center gap-2 text-sm">
             <span>
               Don&quot;t have an account?
             </span>

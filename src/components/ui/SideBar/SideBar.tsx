@@ -28,17 +28,17 @@ interface ISideBarProps extends PropsWithChildren {
 
 function SideBar(props: ISideBarProps) {
   const {
-    items
+    items,
   } = props
 
   return (
-    <nav className='w-[200px] h-full'>
+    <nav className="w-[200px] h-full">
       {/*TODO*/}
       <header>
 
       </header>
 
-      <main className='flex flex-col gap-y-2'>
+      <main className="flex flex-col gap-y-2">
         {
           items.map(
             item => {
@@ -54,8 +54,8 @@ function SideBar(props: ISideBarProps) {
               }
 
               if (item._type === "section") {
-                return <section key={item.code} className='flex flex-col gap-y-2 my-4'>
-                  <Label className='pl-2'>
+                return <section key={item.code} className="flex flex-col gap-y-2 my-4">
+                  <Label className="pl-2">
                     { item.label }
                   </Label>
 
@@ -73,13 +73,13 @@ function SideBar(props: ISideBarProps) {
                         if (childItem._type === "subMenu") {
                           return <div>
                             <div
-                              className='px-2 py-1 rounded flex cursor-pointer items-center gap-2 transition hover:bg-slate-800'>
-                              <span className='flex-1 cursor-pointer'>{childItem.label}</span>
+                              className="px-2 py-1 rounded flex cursor-pointer items-center gap-2 transition hover:bg-slate-800">
+                              <span className="flex-1 cursor-pointer">{childItem.label}</span>
 
                               <ChevronDown/>
                             </div>
 
-                            <div className='px-2 flex flex-col gap-y-2'>
+                            <div className="px-2 flex flex-col gap-y-2">
                               {
                                 childItem.children?.map(
                                   childItemSubItem => (
@@ -89,7 +89,7 @@ function SideBar(props: ISideBarProps) {
                                       label={childItemSubItem.label}
                                       icon={childItemSubItem.icon}
                                     />
-                                  )
+                                  ),
                                 )
                               }
                             </div>
@@ -97,7 +97,7 @@ function SideBar(props: ISideBarProps) {
                         }
 
                         return null
-                      }
+                      },
                     )
                   }
                 </section>
@@ -106,13 +106,13 @@ function SideBar(props: ISideBarProps) {
               if (item._type === "subMenu") {
                 return <div>
                   <div
-                    className='px-2 py-1 rounded flex cursor-pointer items-center gap-2 transition hover:bg-slate-800'>
-                    <span className='flex-1 cursor-pointer'>{ item.label }</span>
+                    className="px-2 py-1 rounded flex cursor-pointer items-center gap-2 transition hover:bg-slate-800">
+                    <span className="flex-1 cursor-pointer">{ item.label }</span>
 
                     <ChevronDown/>
                   </div>
 
-                  <div className='px-2 flex flex-col gap-y-2'>
+                  <div className="px-2 flex flex-col gap-y-2">
                     {
                       item.children?.map(
                         childItem => (
@@ -122,7 +122,7 @@ function SideBar(props: ISideBarProps) {
                             label={childItem.label}
                             icon={childItem.icon}
                           />
-                        )
+                        ),
                       )
                     }
                   </div>
@@ -130,7 +130,7 @@ function SideBar(props: ISideBarProps) {
               }
 
               return null
-            }
+            },
           )
         }
       </main>

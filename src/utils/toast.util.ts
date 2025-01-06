@@ -1,6 +1,6 @@
 import {
   Slide,
-  toast
+  toast,
 } from "react-toastify"
 
 const AUTO_CLOSE_TIME = 3500 // 3.5 seconds
@@ -19,7 +19,7 @@ function showSuccessToast(text: string) {
       pauseOnHover: true,
       hideProgressBar: true,
       draggable: true,
-    }
+    },
   )
 }
 
@@ -34,7 +34,7 @@ function showErrorToast(text: string) {
       pauseOnHover: true,
       hideProgressBar: true,
       draggable: true,
-    }
+    },
   )
 }
 
@@ -49,7 +49,7 @@ function showWarningToast(text: string) {
       pauseOnHover: true,
       hideProgressBar: true,
       draggable: true,
-    }
+    },
   )
 }
 
@@ -64,7 +64,7 @@ function showInfoToast(text: string) {
       pauseOnHover: true,
       hideProgressBar: true,
       draggable: true,
-    }
+    },
   )
 }
 
@@ -72,5 +72,5 @@ export {
   showInfoToast,
   showWarningToast,
   showSuccessToast,
-  showErrorToast
+  showErrorToast,
 }

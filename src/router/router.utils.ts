@@ -1,6 +1,6 @@
 import {
   AUTH_ROUTE_PATH_NAMES,
-  ROUTES
+  ROUTES,
 } from "@/enums/routes.enum.ts";
 
 function isAuthRoutes(pathname: string) {
@@ -14,5 +14,5 @@ function isIndexRoute(pathname: string) {
 
 export {
   isAuthRoutes,
-  isIndexRoute
+  isIndexRoute,
 }

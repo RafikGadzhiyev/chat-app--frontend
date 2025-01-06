@@ -23,15 +23,15 @@ type FormFieldContextValue<
 }
 
 const FormFieldContext = React.createContext<FormFieldContextValue>(
-  {} as FormFieldContextValue
+  {} as FormFieldContextValue,
 )
 
 const FormField = <
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
 >({
-  ...props
-}: ControllerProps<TFieldValues, TName>) => {
+    ...props
+  }: ControllerProps<TFieldValues, TName>) => {
   return (
     <FormFieldContext.Provider value={{ name: props.name }}>
       <Controller {...props} />
@@ -67,7 +67,7 @@ type FormItemContextValue = {
 }
 
 const FormItemContext = React.createContext<FormItemContextValue>(
-  {} as FormItemContextValue
+  {} as FormItemContextValue,
 )
 
 const FormItem = React.forwardRef<
@@ -80,7 +80,7 @@ const FormItem = React.forwardRef<
     [
       "space-y-2",
       className || "",
-    ]
+    ],
   )
 
   return (
@@ -109,7 +109,7 @@ const FormLabel = React.forwardRef<
     [
       textStyle,
       className || "",
-    ]
+    ],
   )
 
   return (
@@ -155,7 +155,7 @@ const FormDescription = React.forwardRef<
     [
       "text-[0.8rem] text-muted-foreground",
       className || "",
-    ]
+    ],
   )
 
   return (
@@ -179,8 +179,8 @@ const FormMessage = React.forwardRef<
   const mergedClasses = cn(
     [
       "text-[0.8rem] font-medium text-destructive",
-      className || ""
-    ]
+      className || "",
+    ],
   )
 
   if (!body) {

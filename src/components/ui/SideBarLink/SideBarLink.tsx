@@ -11,12 +11,12 @@ function SideBarLink(props: ISideBarLinkProps) {
   const {
     path,
     label,
-    icon
+    icon,
   } = props
 
   return (
     <Link
-      className='px-2 py-1 flex items-center gap-4 rounded transition hover:bg-slate-800'
+      className="px-2 py-1 flex items-center gap-4 rounded transition hover:bg-slate-800"
       to={path}
     >
       {

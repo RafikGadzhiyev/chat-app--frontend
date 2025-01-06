@@ -27,16 +27,16 @@ export default function WithSession() {
 
             setAccessToken(actualAccessToken)
 
-            // if (
-            //   isAuthRoutes(route.pathname)
-            // ) {
-            //   navigate(
-            //     ROUTES.CHATS,
-            //     {
-            //       replace: true
-            //     }
-            //   )
-            // }
+            if (
+              isAuthRoutes(route.pathname)
+            ) {
+              navigate(
+                ROUTES.CHATS,
+                {
+                  replace: true
+                }
+              )
+            }
           }
         )
         .catch(

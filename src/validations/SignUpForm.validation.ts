@@ -11,7 +11,7 @@ const signUpFormValidationSchema = z
       confirmPassword: z.string().min(1, "Password is empty")
     }
   )
-  .refine(
+  .refine( 
     (formData) => {
       return formData.password === formData.confirmPassword
     },

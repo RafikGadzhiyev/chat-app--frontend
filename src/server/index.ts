@@ -1,26 +1,37 @@
+import {AxiosResponse} from "axios";
+
+import {
+  CreateChatRequestBody,
+  SignInRequestBody,
+  SignUpRequestBody,
+
+  GetChatsRequestParams,
+} from "@/types.ts";
+
 import apiInstance from "./api.instance.ts"
 
 const api = {
   auth: {
-    signIn: (body: any) => {
+    signIn: (body: SignInRequestBody) => {
       return apiInstance.post(
-          "/auth/sign-in",
-          body,
-          {
-            withCredentials: true
-          }
-        )
+        "/auth/sign-in",
+        body,
+        {
+          withCredentials: true,
+        },
+      )
         .then(getItemsFromResponse)
     },
 
-    signUp: (body: any) => {
+    signUp: (body: SignUpRequestBody) => {
       return apiInstance.post(
         "/auth/sign-up",
         body,
         {
           withCredentials: true,
-        }
+        },
       )
+        .then(getItemsFromResponse)
     },
 
     session: () => {
@@ -28,31 +39,30 @@ const api = {
         "/auth/session",
         {
           withCredentials: true,
-        }
+        },
       )
         .then(getItemsFromResponse)
-    }
+    },
   },
 
   chat: {
-    get: (params: any) => {
+    get: (params: GetChatsRequestParams) => {
       return apiInstance
         .get(
           "/chat",
           {
-            params
-          }
+            params,
+          },
         )
         .then(getItemsFromResponse)
     },
-    // ANY FOR NOW
-    create: (body: any) => {
+    create: (body: CreateChatRequestBody) => {
       return apiInstance.post(
         "/chat/new",
-          body
+        body,
       )
         .then(getItemsFromResponse)
-    }
+    },
   },
 
   user: {
@@ -62,12 +72,12 @@ const api = {
           "/user",
         )
         .then(getItemsFromResponse)
-    }
-  }
+    },
+  },
 }
 
 // TODO: EXPAND LOGIC
-function getItemsFromResponse(response: any) {
+function getItemsFromResponse(response: AxiosResponse) {
   if (
     response.status >= 400
     && response.status <= 504

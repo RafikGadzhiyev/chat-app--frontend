@@ -1,10 +1,8 @@
 import clsx from "clsx";
+import {Chat} from "@/types.ts";
 
 interface ChatItem {
-  chat: {
-    _id: string,
-    title: string,
-  },
+  chat: Chat,
   isSelected: boolean,
   onClick: (chatId: string) => void
 }
@@ -21,8 +19,8 @@ export default function ChatItem(props: ChatItem) {
     return clsx(
       "transition p-2 rounded-md cursor-pointer hover:bg-slate-600",
       {
-        "bg-slate-700 cursor-default": isSelected
-      }
+        "bg-slate-700 cursor-default": isSelected,
+      },
     )
   }
 
@@ -32,7 +30,7 @@ export default function ChatItem(props: ChatItem) {
 
   return (
     <li
-      role='button'
+      role="button"
       tabIndex={0}
       onClick={selectChat}
       className={getComputedClasses()}

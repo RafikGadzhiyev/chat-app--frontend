@@ -10,7 +10,7 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage
+  FormMessage,
 } from "@/components/ui/Form/Form.tsx";
 
 import {showErrorToast} from "@/utils/toast.util.ts";
@@ -25,16 +25,17 @@ import {ROUTES} from "@/enums/routes.enum.ts";
 
 import api from "@/server/index.ts"
 import Loading from "@/components/ui/Loading/Loading.tsx";
+import {SignUpResponseBody} from "@/types.ts";
 
 function SignUp() {
   const {
     isLoading,
     startLoading,
-    stopLoading
+    stopLoading,
   } = useLoading()
 
   const setAccessToken = useAuthStore(store => store.setAccessToken)
-  const setUser = useAuthStore(store => store.setAccessToken)
+  const setUser = useAuthStore(store => store.setUser)
 
   const formControlState = useForm<SignUpFormValidation>(
     {
@@ -46,33 +47,33 @@ function SignUp() {
         confirmPassword: "",
       },
       resolver: zodResolver(signUpFormValidation),
-    }
+    },
   )
 
   function signUp(userCredentials: SignUpFormValidation) {
     startLoading()
     api.auth.signUp(userCredentials)
       .then(
-        (signUpResponse: any) => {
+        (signUpResponse: SignUpResponseBody) => {
           console.log(signUpResponse)
 
           setAccessToken(signUpResponse.token)
           setUser(signUpResponse.user)
-        }
+        },
       )
       .catch(
         (err: Error) => {
           console.error(err)
           showErrorToast(err.message || "")
-        }
+        },
       )
       .finally(stopLoading)
   }
 
-  return <div className='flex w-full min-h-[100vh]'>
-    <div className='flex-1 flex items-center justify-center px-4 py-2'>
-      <div className='flex flex-col gap-5'>
-        <h1 className='font-bold text-4xl text-center'>Welcome!</h1>
+  return <div className="flex w-full min-h-[100vh]">
+    <div className="flex-1 flex items-center justify-center px-4 py-2">
+      <div className="flex flex-col gap-5">
+        <h1 className="font-bold text-4xl text-center">Welcome!</h1>
 
         <div>
           <Form
@@ -80,10 +81,10 @@ function SignUp() {
           >
             <form
               onSubmit={formControlState.handleSubmit(signUp)}
-              className='flex flex-col gap-3 w-[25rem]'
+              className="flex flex-col gap-3 w-[25rem]"
             >
               <FormField
-                name='name'
+                name="name"
                 render={
                   ({field}) => (
                     <FormItem>
@@ -93,7 +94,7 @@ function SignUp() {
 
                       <FormControl>
                         <Input
-                          placeholder='Name'
+                          placeholder="Name"
                           {...field}
                         />
                       </FormControl>
@@ -105,7 +106,7 @@ function SignUp() {
               />
 
               <FormField
-                name='tag'
+                name="tag"
                 render={
                   ({field}) => (
                     <FormItem>
@@ -115,7 +116,7 @@ function SignUp() {
 
                       <FormControl>
                         <Input
-                          placeholder='#tag'
+                          placeholder="#tag"
                           {...field}
                         />
                       </FormControl>
@@ -127,7 +128,7 @@ function SignUp() {
               />
 
               <FormField
-                name='email'
+                name="email"
                 render={
                   ({field}) => (
                     <FormItem>
@@ -137,8 +138,8 @@ function SignUp() {
 
                       <FormControl>
                         <Input
-                          placeholder='Email'
-                          type='email'
+                          placeholder="Email"
+                          type="email"
                           {...field}
                         />
                       </FormControl>
@@ -150,7 +151,7 @@ function SignUp() {
               />
 
               <FormField
-                name='password'
+                name="password"
                 render={
                   ({field}) => (
                     <FormItem>
@@ -160,8 +161,8 @@ function SignUp() {
 
                       <FormControl>
                         <Input
-                          placeholder='Password'
-                          type='password'
+                          placeholder="Password"
+                          type="password"
                           {...field}
                         />
                       </FormControl>
@@ -173,7 +174,7 @@ function SignUp() {
               />
 
               <FormField
-                name='confirmPassword'
+                name="confirmPassword"
                 render={
                   ({field}) => (
                     <FormItem>
@@ -183,8 +184,8 @@ function SignUp() {
 
                       <FormControl>
                         <Input
-                          placeholder='Confirm password'
-                          type='password'
+                          placeholder="Confirm password"
+                          type="password"
                           {...field}
                         />
                       </FormControl>
@@ -196,13 +197,13 @@ function SignUp() {
               />
 
               <div>
-                <div className='mt-4 flex'>
-                  <Button className='flex-1'>
+                <div className="mt-4 flex">
+                  <Button className="flex-1">
                     Sign up
                   </Button>
                 </div>
 
-                <div className='flex items-center gap-2 text-sm'>
+                <div className="flex items-center gap-2 text-sm">
                   <span>
                     Already have an account?
                   </span>

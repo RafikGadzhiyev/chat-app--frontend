@@ -5,11 +5,11 @@ import {zodResolver} from "@hookform/resolvers/zod";
 import { useLoading } from "@/hooks/useLoading.tsx";
 
 import
-  chatCreationFormValidation,
-  {
-    ChatCreationFormValidation
-  }
-from "@/validations/ChatCreationForm.validation.ts";
+chatCreationFormValidation,
+{
+  ChatCreationFormValidation,
+}
+  from "@/validations/ChatCreationForm.validation.ts";
 
 import { Input } from "@/components/ui/Input/Input.tsx";
 import { Button } from "@/components/ui/Button/Button.tsx";
@@ -19,16 +19,15 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage
+  FormMessage,
 } from "@/components/ui/Form/Form.tsx";
 import Loading from "@/components/ui/Loading/Loading.tsx";
 
 import { showErrorToast } from "@/utils/toast.util.ts";
 
-import {Chat} from "@/types.ts";
+import {Chat, User} from "@/types.ts";
 
 import api from "@/server";
-import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/Select/Select.tsx";
 import {ScrollArea} from "@/components/ui/ScrollArea/ScrollArea.tsx";
 import {Checkbox} from "@/components/ui/CheckBox/Checkbox.tsx";
 
@@ -38,8 +37,8 @@ interface IChatCreationForm {
 }
 
 export default function ChatCreationForm(props: IChatCreationForm) {
-  const [users, setUsers] = useState<any[]>([])
-  const [memberEmails, setMemberEmails] = useState<any[]>([])
+  const [users, setUsers] = useState<User[]>([])
+  const [memberEmails, setMemberEmails] = useState<string[]>([])
 
   const {
     isLoading,
@@ -53,8 +52,8 @@ export default function ChatCreationForm(props: IChatCreationForm) {
       defaultValues: {
         title: "",
         description: "",
-      }
-    }
+      },
+    },
   )
 
   function createChat(data: ChatCreationFormValidation) {
@@ -65,7 +64,7 @@ export default function ChatCreationForm(props: IChatCreationForm) {
         ...data,
         // TODO: Add validation
         memberEmails,
-      }
+      },
     )
       .then(
         createdChat => {
@@ -73,7 +72,7 @@ export default function ChatCreationForm(props: IChatCreationForm) {
           props.onChatCreate(createdChat)
           // Close dialog
           props.closeDialog()
-        }
+        },
       )
       .catch(err => {
         console.error(err)
@@ -96,12 +95,12 @@ export default function ChatCreationForm(props: IChatCreationForm) {
       .finally(stopLoading)
   }
 
-  function addMember(member: any) {
+  function addMember(member: User) {
     setMemberEmails(
       (prevMemberEmails) => [
         ...prevMemberEmails,
         member.email,
-      ]
+      ],
     )
   }
 
@@ -112,14 +111,14 @@ export default function ChatCreationForm(props: IChatCreationForm) {
   return (
     <Form
       {...formControlState}
-     >
+    >
       <form
         onSubmit={formControlState.handleSubmit(createChat)}
       >
-        <div className='flex flex-col  gap-3'>
+        <div className="flex flex-col  gap-3">
           <FormField
             control={formControlState.control}
-            name='title'
+            name="title"
             render={
               ({field}) => (
                 <FormItem>
@@ -129,7 +128,7 @@ export default function ChatCreationForm(props: IChatCreationForm) {
 
                   <FormControl>
                     <Input
-                      placeholder='Title'
+                      placeholder="Title"
                       {...field}
                     />
                   </FormControl>
@@ -142,7 +141,7 @@ export default function ChatCreationForm(props: IChatCreationForm) {
 
           <FormField
             control={formControlState.control}
-            name='description'
+            name="description"
             render={
               ({field}) => (
                 <FormItem>
@@ -152,7 +151,7 @@ export default function ChatCreationForm(props: IChatCreationForm) {
 
                   <FormControl>
                     <Input
-                      placeholder='Description'
+                      placeholder="Description"
                       {...field}
                     />
                   </FormControl>
@@ -164,15 +163,15 @@ export default function ChatCreationForm(props: IChatCreationForm) {
           />
 
           <ScrollArea>
-            <h2 className='font-bold text-lg'>Users</h2>
+            <h2 className="font-bold text-lg">Users</h2>
 
             <ul>
               {
                 users.map(
                   user => (
                     <li
-                    key={user._id}
-                      className='flex items-center gap-2 '
+                      key={user._id}
+                      className="flex items-center gap-2 "
                     >
                       {/* REFACTOR: Write more efficient code*/}
                       <Checkbox
@@ -184,18 +183,18 @@ export default function ChatCreationForm(props: IChatCreationForm) {
                         { user.name }
                       </span>
                     </li>
-                  )
+                  ),
                 )
               }
             </ul>
           </ScrollArea>
         </div>
 
-        <div className='flex items-center'>
+        <div className="flex items-center">
           <Button
-            type='submit'
-            className='mt-3 ml-auto'
-            variant='secondary'
+            type="submit"
+            className="mt-3 ml-auto"
+            variant="secondary"
           >
             Create
           </Button>

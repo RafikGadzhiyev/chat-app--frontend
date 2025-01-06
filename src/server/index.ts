@@ -53,6 +53,16 @@ const api = {
       )
         .then(getItemsFromResponse)
     }
+  },
+
+  user: {
+    get: () => {
+      return apiInstance
+        .get(
+          "/user",
+        )
+        .then(getItemsFromResponse)
+    }
   }
 }
 

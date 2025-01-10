@@ -8,15 +8,14 @@ const Toggle = React.forwardRef<
   React.ElementRef<typeof TogglePrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof TogglePrimitive.Root> &
     VariantProps<typeof toggleVariants>
->((
-  {
+>((props,  ref) => {
+  const {
     className,
     variant,
     size,
-    ...props
-  },
-  ref,
-) => {
+    ...restProps
+  } = props
+
   const classesFromVariants = toggleVariants(
     {
       variant,
@@ -35,7 +34,7 @@ const Toggle = React.forwardRef<
     <TogglePrimitive.Root
       ref={ref}
       className={mergedClasses}
-      {...props}
+      {...restProps}
     />
   )
 })

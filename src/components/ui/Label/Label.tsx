@@ -8,13 +8,12 @@ const Label = React.forwardRef<
   React.ElementRef<typeof LabelPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root> &
     VariantProps<typeof labelVariants>
->((
-  {
+>((props,  ref) => {
+  const {
     className,
-    ...props
-  },
-  ref,
-) => {
+    ...restProps
+  } = props
+
   const classesFromVariants = labelVariants()
   const mergedClasses = cn(
     [
@@ -27,7 +26,7 @@ const Label = React.forwardRef<
     <LabelPrimitive.Root
       ref={ref}
       className={mergedClasses}
-      {...props}
+      {...restProps}
     />
   )
 })

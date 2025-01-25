@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {useNavigate} from "react-router-dom";
+import {Outlet, useNavigate} from "react-router-dom";
 
 import { Input } from "@/components/ui/Input/Input.tsx";
 import Loading from "@/components/ui/Loading/Loading.tsx";
@@ -96,7 +96,9 @@ export default function ChatsPage() {
     </div>
 
     <div className="bg-slate-800 flex-1 rounded-sm p-2 py-1">
-
+      <Outlet
+        key={selectedChat}
+      />
     </div>
 
     <Loading

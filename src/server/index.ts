@@ -89,7 +89,7 @@ const api = {
     create: (body: any) => {
       return apiInstance
         .post(
-          "/create",
+          "/message/create",
           body,
         )
         .then(getItemsFromResponse)

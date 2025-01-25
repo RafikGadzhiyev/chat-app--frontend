@@ -74,6 +74,27 @@ const api = {
         .then(getItemsFromResponse)
     },
   },
+
+  message: {
+    get: (params: any) => {
+      return apiInstance
+        .get(
+          "/message",
+          {
+            params,
+          },
+        )
+        .then(getItemsFromResponse)
+    },
+    create: (body: any) => {
+      return apiInstance
+        .post(
+          "/create",
+          body,
+        )
+        .then(getItemsFromResponse)
+    },
+  },
 }
 
 // TODO: EXPAND LOGIC

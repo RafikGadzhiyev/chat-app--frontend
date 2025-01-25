@@ -17,6 +17,7 @@ export default function WithSession() {
   const navigate = useNavigate()
 
   const setAccessToken = useAuthStore((store) => store.setAccessToken)
+  const setUser = useAuthStore((store) => store.setUser)
 
   useEffect(
     () => {
@@ -24,8 +25,10 @@ export default function WithSession() {
         .then(
           (data) => {
             const actualAccessToken = data.token
+            const actualUser = data.user
 
             setAccessToken(actualAccessToken)
+            setUser(actualUser)
 
             if (
               isAuthRoutes(route.pathname)

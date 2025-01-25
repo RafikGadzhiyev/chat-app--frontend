@@ -7,6 +7,7 @@ import SignUp from "@/pages/SignUp.tsx";
 import NotFound from "@/pages/404.tsx";
 import ChatsPage from "@/pages/Chats.tsx";
 
+import OpenedChat from "@/components/OpenedChat.tsx";
 import WithSession from "@/components/WithSession.tsx";
 
 import {ROUTES} from "@/enums/routes.enum.ts";
@@ -30,8 +31,14 @@ const router = createBrowserRouter(
           Component: SignUp,
         },
         {
-          path: ROUTES.CHATS + "/:id?",
+          path: ROUTES.CHATS,
           Component: ChatsPage,
+          children: [
+            {
+              path: ":id?",
+              Component: OpenedChat,
+            },
+          ],
         },
         {
           path: "*",

@@ -1,6 +1,21 @@
 import { io } from "socket.io-client"
 
-// Is it good here?
 const socket = io(import.meta.env.VITE_SERVER_BASE_URL)
 
-export { socket }
+function bindEvent(eventCode: string, callBack: (args: IArguments) => void) {
+  socket.on(
+    eventCode,
+    callBack,
+  )
+}
+
+function unbindEvent(eventCode: string) {
+  socket.off(eventCode)
+}
+
+export {
+  socket,
+
+  bindEvent,
+  unbindEvent,
+}

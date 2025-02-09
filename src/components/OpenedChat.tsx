@@ -1,4 +1,4 @@
-import {FormEvent, useEffect, useState} from "react";
+import {FormEvent, useEffect, useLayoutEffect, useState} from "react";
 import { useParams } from "react-router-dom"
 import useAuthStore from "@/store/auth.store.ts";
 import {ScrollArea} from "@/components/ui/ScrollArea/ScrollArea.tsx";
@@ -9,6 +9,10 @@ import {Input} from "@/components/ui/Input/Input.tsx";
 import {Button} from "@/components/ui/Button/Button.tsx";
 import {Icon} from "@/components/ui/Icon/Icon.tsx";
 import Message from "@/components/Message.tsx";
+
+import { SOCKET_EMIT_EVENTS, SOCKET_SERVER_EMIT_EVENTS } from "@/enums/socket.enum"
+
+import {socket, bindEvent, unbindEvent} from "@/instances/socket.instance"
 
 function OpenedChat() {
   const [messages, setMessages] = useState<any[]>([])
@@ -58,14 +62,14 @@ function OpenedChat() {
       prevMessages => [...prevMessages, message],
     )
 
+    setTextToSend("")
+
     api.message.create(
       {
         message: message,
       },
     )
       .then(message => {
-        setTextToSend("")
-
         setMessages(
           prevMessages => {
             const messages = [];
@@ -77,6 +81,13 @@ function OpenedChat() {
             messages.push(message)
 
             return messages
+          },
+        )
+
+        socket.emit(
+          SOCKET_EMIT_EVENTS.NEW_MESSAGE,
+          {
+            message,
           },
         )
       })
@@ -98,6 +109,22 @@ function OpenedChat() {
     getMessages()
   }, [params.id, user?._id]);
 
+  useLayoutEffect(() => {
+    bindEvent(
+      SOCKET_SERVER_EMIT_EVENTS.BROADCAST_MESSAGE,
+      (payload) => {
+        setMessages(
+          prevMessages => [
+            ...prevMessages,
+            payload.message,
+          ],
+        )
+      },
+    )
+
+    return () => unbindEvent(SOCKET_SERVER_EMIT_EVENTS.BROADCAST_MESSAGE)
+  }, []);
+
   return <div className="h-full">
     <div className="h-[5%]">
     </div>
@@ -107,9 +134,9 @@ function OpenedChat() {
         <div className="flex flex-col gap-4">
           {
             messages.map(
-              message => (
+              (message, messageIndex) => (
                 <Message
-                  key={message._id}
+                  key={message._id || messageIndex}
                   message={message}
                   isCurrentUserMessage={message.senderId === user?._id}
                 />

@@ -13,10 +13,13 @@ import CreateChatDialog from "@/components/dialogs/CreateChatDialog.tsx";
 import {ROUTES} from "@/enums/routes.enum.ts";
 import ChatItem from "@/components/ChatItem.tsx";
 import {Chat} from "@/types.ts";
+import useAuthStore from "@/store/auth.store.ts";
 
 export default function ChatsPage() {
   const [chats, setChats] = useState<Chat[]>([])
   const [selectedChat, setSelectedChat] = useState<string | null>(null)
+
+  const user = useAuthStore(store => store.user)
 
   const {
     isLoading,
@@ -27,11 +30,17 @@ export default function ChatsPage() {
   const navigate = useNavigate()
 
   function getChats() {
+    if (!user) {
+      return;
+    }
+
     startLoading()
 
     api.chat.get(
       {
-        memberEmails: ["1@mail.ru"],
+        memberEmails: [
+          user.email,
+        ],
       },
     )
       .then(chatsFromServer => {
@@ -61,7 +70,7 @@ export default function ChatsPage() {
 
   useEffect(() => {
     getChats()
-  }, []);
+  }, [user?.email]);
 
   return <div className="flex gap-4 h-screen">
     <div className="bg-slate-800 w-[300px] rounded-sm p-2 py-1">

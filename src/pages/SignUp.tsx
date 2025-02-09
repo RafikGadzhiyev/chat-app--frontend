@@ -1,6 +1,6 @@
 import {zodResolver} from "@hookform/resolvers/zod";
 import {useForm} from "react-hook-form";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 import {Input} from "@/components/ui/Input/Input.tsx";
 import {Button} from "@/components/ui/Button/Button.tsx";
@@ -34,6 +34,8 @@ function SignUp() {
     stopLoading,
   } = useLoading()
 
+  const navigate = useNavigate()
+
   const setAccessToken = useAuthStore(store => store.setAccessToken)
   const setUser = useAuthStore(store => store.setUser)
 
@@ -52,6 +54,7 @@ function SignUp() {
 
   function signUp(userCredentials: SignUpFormValidation) {
     startLoading()
+
     api.auth.signUp(userCredentials)
       .then(
         (signUpResponse: SignUpResponseBody) => {
@@ -59,6 +62,8 @@ function SignUp() {
 
           setAccessToken(signUpResponse.token)
           setUser(signUpResponse.user)
+
+          navigate(ROUTES.CHATS)
         },
       )
       .catch(
